@@ -1,9 +1,11 @@
 class Person
 
+# attr_reader :bike
+
   def initialize(name)  
     @name = name  
-    @bike = 0  
-  end  
+    @bike = nil
+  end 
   
   def name  
     @name
@@ -16,11 +18,11 @@ class Person
     @bike
   end
 
-  def gets_bike
-    @bike +=1
+  def rents(bike)
+    @bike = bike
   end
 
   def returns_bike
-    @bike -=1
+    @bike = nil
   end
 end
