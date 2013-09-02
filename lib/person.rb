@@ -19,7 +19,11 @@ class Person
   end
 
   def rents(bike)
-    @bike = bike
+    if bike == nil
+      @bike = bike
+    else
+      return "You've already got a bike!"
+    end
   end
 
   def returns_bike

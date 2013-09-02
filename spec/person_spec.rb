@@ -24,9 +24,16 @@ let(:person) {Person.new('Srikanth')}
 
   it 'should get a bike once it is rented' do
   # john = Person.new("John")
-  bike = Bike.new
+    bike = Bike.new
     person.rents(bike)
     person.bike.should == bike
+  end
+
+  it 'should not be able to rent more than one bike' do
+    bike = Bike.new
+    bike2 = Bike.new
+    person.rents(bike)
+    person.rents(bike2).should eq "You've already got a bike!"
   end
 
   it 'should return bike' do

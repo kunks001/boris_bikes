@@ -1,5 +1,4 @@
 class Station
-	require './bike'
 
 	def initialize(location)
 		@location = location
