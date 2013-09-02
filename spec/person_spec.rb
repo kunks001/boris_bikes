@@ -26,7 +26,7 @@ let(:person) {Person.new('Srikanth')}
   # john = Person.new("John")
     bike = Bike.new
     person.rents(bike)
-    person.bike.should == bike
+    person.bike == bike
   end
 
   it 'should not be able to rent more than one bike' do
