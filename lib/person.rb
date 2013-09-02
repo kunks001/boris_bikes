@@ -2,10 +2,7 @@ class Person
 
 require 'station'
 require 'bike'
-
-attr_reader :bikes
-
-# attr_reader :bike
+attr_accessor :bicycles
 
   def initialize(name)  
     @name = name  
@@ -24,5 +21,9 @@ attr_reader :bikes
   end
 
   def rent
+    if @bike == nil
+      self.bike == Station.bicycles.slice(1)
+    else
+    end
   end
 end

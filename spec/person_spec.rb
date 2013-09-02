@@ -20,29 +20,8 @@ let(:station) {Station.new('Old Street')}
   end
 
   it 'should get a bike once it is rented' do
+    station.bikes_daily_setup
+    person.rent
+    person.bike.should_not eq nil
   end
-
-
-
-  # it 'should not be able to rent more than one bike' do
-  #   bike = Bike.new
-  #   bike = Bike.new
-  #   person.rents
-  #   person.rents.should eq "You've already got a bike!"
-  # end
-
-  # it 'breaks bike' do
-  #   bike = Bike.new
-  #   person.rents
-  #   person.breaks_bike
-  #   bike.broken? == true
-  # end
-
-  # it 'should return bike' do
-  # # john = Person.new("John")
-  # bike = Bike.new
-  #   person.rents(bike)
-  #   person.returns_bike
-  #   person.bike.should == nil
-  # end
 end

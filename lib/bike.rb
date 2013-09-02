@@ -8,7 +8,7 @@ class Bike
   	@broken
   end
 
-  def break
+  def when_broken
   	@broken = true
   end
 

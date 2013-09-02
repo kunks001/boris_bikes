@@ -1,45 +1,37 @@
 class Station
 require 'bike'
-attr_accessor :bikes
+attr_accessor :bicycles
 
 	def initialize(name)
 		@name = name
-		@bikes = Array.new
+		@bicycles = Array.new
 	end
 
 	def name
 		@name
 	end
 
-	def bikes
-		@bikes
+  def id
+  end
+
+	def bicycles
+		@bicycles
 	end
 
 	def bikes_daily_setup
 		res = 0
 		while res < 25
 			bike = Bike.new
-			@bikes << bike
+			@bicycles << bike
 			res += 1
 		end
 	end
 
 	def are_there_bikes?
-		if @bikes.count > 0
-			true
-		else
-			false
-		end
+		@bicycles.count > 0? true : false
 	end
 
-	def space
-		if bikes.count < 30
-			true
-		else
-			false
-		end
-	end
-
-	def id
+	def space?
+		@bicycles.count < 30? true : false
 	end
 end

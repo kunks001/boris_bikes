@@ -5,45 +5,43 @@ describe Station do
 let(:station) {Station.new("Old_Street")}
 
 	it 'should have a name' do
-		# old_street = Station.new("Old Street")
-		station.name == "Old_Street"
+  		station.name == "Old_Street"
 	end
 
 	it 'should not respond to incorrect name' do
-		# old_street = Station.new("Old Street")
 		station.name != "St Pancras"
 	end
 
 	it 'should initialise with an empty array' do
-		station.bikes.count == 0
+		station.bicycles.count == 0
 	end
  	
- 	it 'should have 25 bikes at the start of the day' do
+ 	it 'should have 25 bicycles at the start of the day' do
  		station.bikes_daily_setup
- 		station.bikes.count == 25
+ 		station.bicycles.count == 25
  	end
 
- 	it 'should have space for thirty bikes' do
+ 	it 'should have space for thirty bicycles' do
  		station.bikes_daily_setup
-		station.space == true
+		station.space? == true
 	end
 
-	it 'should not have space for more than thirty bikes' do
+	it 'should not have space for more than thirty bicycles' do
 		res = 0
 		while res < 30
 			bike = Bike.new
-			station.bikes << bike
+			station.bicycles << bike
 			res += 1
 		end
-		station.space == false
+		station.space? == false
 	end
 
-	it 'should know when it has bikes left' do
+	it 'should know when it has bicycles left' do
 		station.bikes_daily_setup
 		station.are_there_bikes? == true
 	end
-	
-	it 'should know when it has no bikes left' do
+
+	it 'should know when it has no bicycles left' do
 		station.are_there_bikes? == false
 	end
 

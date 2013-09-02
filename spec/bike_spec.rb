@@ -8,7 +8,7 @@ describe Bike do
 
 	it 'should be broken once it breaks' do
 		bike = Bike.new
-		bike.break
+		bike.when_broken
 		bike.broken? == true
 	end
 end
