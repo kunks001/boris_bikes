@@ -14,13 +14,32 @@ let(:station) {Station.new("Old_Street")}
 		station.location != "St Pancras"
 	end
 
-	it 'should initialise with 25 spaces' do
-		station.bikes.count == 25
+	it 'should initialise with an empty array' do
+		station.bikes.count == 0
 	end
  	
- 	it 'should have 20 bikes at the start of the day' do
+ 	it 'should have 25 bikes at the start of the day' do
  		station.bikes_at_day_start
- 		
- 		res[bike] == 20
+ 		station.bikes.count == 25
  	end
+
+ 	it 'should have space for thirty bikes' do
+ 		res = 0
+		while res < 25
+			bike = Bike.new
+			station.bikes << bike
+			res += 1
+		end
+		station.space == true
+	end
+
+	it 'should not have space for more than thirty bikes' do
+		res = 0
+		while res < 30
+			bike = Bike.new
+			station.bikes << bike
+			res += 1
+		end
+		station.space == false
+	end
 end
