@@ -1,15 +1,26 @@
-class Person
+# class Person
 
-attr_accessor :first_name, :last_name
+#   def initialize(name)  
+#     @name = name  
+#     @bike = 0  
+#   end  
+  
+#   def name  
+#     @name
+#   end
 
-	def initialize(first_name, last_name)
-		@person = Person.new
-	end
+#   def id
+#   end
 
-	def first_name
-		@person.first_name
-	end
+#   def bike
+#     @bike
+#   end
 
+#   def gets_bike
+#     @bike +=1
+#   end
 
-
-end
+#   def returns_bike
+#     @bike -=1
+#   end
+# end
