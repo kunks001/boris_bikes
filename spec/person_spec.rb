@@ -36,6 +36,13 @@ let(:person) {Person.new('Srikanth')}
     person.rents(bike2).should eq "You've already got a bike!"
   end
 
+  it 'breaks bike' do
+    bike = Bike.new
+    person.rents(bike)
+    person.breaks_bike
+    bike.broken? == true
+  end
+
   it 'should return bike' do
   # john = Person.new("John")
   bike = Bike.new

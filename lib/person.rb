@@ -1,5 +1,8 @@
 class Person
 
+require 'station'
+require 'bike'
+
 # attr_reader :bike
 
   def initialize(name)  
@@ -19,11 +22,15 @@ class Person
   end
 
   def rents(bike)
-    if bike == nil
+    if @bike == nil
       @bike = bike
     else
       return "You've already got a bike!"
     end
+  end
+
+  def breaks_bike
+    @bike.break
   end
 
   def returns_bike

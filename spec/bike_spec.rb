@@ -11,4 +11,8 @@ describe Bike do
 		bike.break
 		bike.broken? == true
 	end
+
+	it 'should have 25 spaces' do
+		@bikes = %w(nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil)
+	end
 end
