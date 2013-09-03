@@ -35,13 +35,19 @@ attr_accessor :bicycles
       @bike.gets_broken
       with_a_broken_bike
     else
-    #   arrive_at(station)
+      "You reached #{station}!"
     end
   end
 
-  def arrive_at(station)
-    want_to_return_bike?
-  end
+  def want_to_return_bike?(station, answer)
+    if answer = "yes"
+      return_bike(station)
+    elsif answer = "no"
+      "Well, where do you want to go next?"
+    else
+      "Make up your bloody mind!"
+    end
+  end 
 
   def return_bike(station)
     if station.space?

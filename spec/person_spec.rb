@@ -50,7 +50,17 @@ let(:station) {Station.new('Old Street')}
     station.bikes_daily_setup
     person.rent(station)
     Kernel.stub!(:rand).and_return( 1..5 )
-    person.cycle_to(station)
+    person.cycle_to(station).should eq "You reached #{station}!"
     person.bike.broken? == false
+  end
+
+  it 'should return bike if it wants to' do
+    station.bikes_daily_setup
+    person.rent(station)
+    person.bike.should_not eq nil
+    station.bicycles.count == 24
+    person.want_to_return_bike?(station, "yes")
+    person.bike.should eq nil
+    station.bicycles.count == 25
   end
 end
