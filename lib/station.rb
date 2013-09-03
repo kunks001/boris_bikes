@@ -27,7 +27,7 @@ attr_accessor :bicycles
 		end
 	end
 
-	def are_there_bikes?
+	def bikes_available?
 		@bicycles.count > 0? true : false
 	end
 

@@ -21,7 +21,7 @@ let(:station) {Station.new('Old Street')}
 
   it 'should get a bike once it is rented' do
     station.bikes_daily_setup
-    person.rent
+    person.rent(station)
     person.bike.should_not eq nil
   end
 end

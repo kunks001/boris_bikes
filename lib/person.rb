@@ -20,9 +20,10 @@ attr_accessor :bicycles
     @bike
   end
 
-  def rent
+  def rent(station)
+    station.bikes_available?
     if @bike == nil
-      self.bike == Station.bicycles.slice(1)
+      @bike = station.bicycles.shift
     else
     end
   end

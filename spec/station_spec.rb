@@ -38,11 +38,11 @@ let(:station) {Station.new("Old_Street")}
 
 	it 'should know when it has bicycles left' do
 		station.bikes_daily_setup
-		station.are_there_bikes? == true
+		station.bikes_available? == true
 	end
 
 	it 'should know when it has no bicycles left' do
-		station.are_there_bikes? == false
+		station.bikes_available? == false
 	end
 
 end
