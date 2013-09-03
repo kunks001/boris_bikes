@@ -66,7 +66,7 @@ let(:person) {Person.new("Srikanth")}
     station.bicycles.last == object
   end
 
-  
+
 end
 
 

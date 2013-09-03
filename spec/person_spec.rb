@@ -41,7 +41,7 @@ let(:station) {Station.new('Old Street')}
   it 'should have a one in six chance of breaking the bike' do
     station.bikes_daily_setup
     person.rent(station)
-    Kernel.stub!(:rand).and_return( 6 )
+    Kernel.stub(:rand).and_return( 6 )
     person.cycle_to(station)
     person.bike.broken? == true 
   end
@@ -49,7 +49,7 @@ let(:station) {Station.new('Old Street')}
   it 'should have a five in six chance of not breaking the bike' do
     station.bikes_daily_setup
     person.rent(station)
-    Kernel.stub!(:rand).and_return( 1..5 )
+    Kernel.stub(:rand).and_return( 1..5 )
     person.cycle_to(station).should eq "You reached #{station}!"
     person.bike.broken? == false
   end
@@ -62,5 +62,15 @@ let(:station) {Station.new('Old Street')}
     person.want_to_return_bike?(station, "yes")
     person.bike.should eq nil
     station.bicycles.count == 25
+  end
+
+  it 'should return a broken bike if broken' do
+    station.bikes_daily_setup
+    person.rent(station)
+    Kernel.stub(:rand).and_return( 6 )
+    person.cycle_to(station)
+    person.with_a_broken_bike(station)
+    bike = station.bicycles.last
+    bike.broken? == true
   end
 end

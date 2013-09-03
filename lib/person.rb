@@ -33,7 +33,7 @@ attr_accessor :bicycles
     probability = rand(1..6)
     if probability == 6
       @bike.gets_broken
-      with_a_broken_bike
+      "Oh no, your bike is broken!"
     else
       "You reached #{station}!"
     end
@@ -59,7 +59,8 @@ attr_accessor :bicycles
     end
   end
 
-  def with_a_broken_bike
-    "Oh no, your bike is broken!"
+  def with_a_broken_bike(station)
+    return_bike(station)
+    "you walked to #{station} with your broken bike and put it back sheepishly"
   end
 end
