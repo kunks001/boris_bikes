@@ -2,10 +2,12 @@ class Station
 require 'bike'
 require 'person'
 attr_accessor :bicycles
+attr_accessor :broken
 
 	def initialize(name)
 		@name = name
 		@bicycles = Array.new
+		@broken_bikes = Array.new
 		bikes_daily_setup
 	end
 
@@ -13,11 +15,15 @@ attr_accessor :bicycles
 		@name
 	end
 
-  def id
-  end
+	def id
+	end
 
 	def bicycles
 		@bicycles
+	end
+
+	def broken_bikes
+		@broken_bikes
 	end
 
 	def bikes_daily_setup
@@ -34,7 +40,11 @@ attr_accessor :bicycles
 	end
 
 	def bike_returned_by(person)
-      @bicycles << person.bike if space?
+        if space? && person.bike.broken?
+      		@broken_bikes << person.bike 	
+  		else
+  			@bicycles << person.bike
+  		end
       nil
 		#TO DO: ensure option if station is full
 	end

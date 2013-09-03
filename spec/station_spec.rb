@@ -60,8 +60,19 @@ let(:van) {Van.new}
   end
 
   it 'should gain a bike once it is returned' do
+    bike = Bike.new
+    person = double(:person, { bike: bike })
+
     station.bike_returned_by(person)
     station.bicycles.count.should == 26
+  end
+
+  it 'should gain a broken bike once it is returned' do
+    bike = Bike.new
+    person = double(:person, { bike: bike.gets_broken })
+    
+    station.bike_returned_by(person)
+    station.broken_bikes.count.should == 1
   end
 
   it 'has consistent object id from station to person' do
