@@ -18,7 +18,7 @@ require './lib/garage'
 		it 'should take bikes from the van' do
 			bikes = van.broken_bikes 
 			bikes << bike.gets_broken
-			garage.take_bikes_from_van(van)
+			garage.takes_bikes_from_van(van)
 
 			garage.bike_rack.count.should == 1
 		end
@@ -32,6 +32,12 @@ require './lib/garage'
 		end
 
 		it 'should return fixed bikes' do
-			
+			array = Array.new(10,Bike.new)
+			garage.instance_variable_set(:@bike_rack, array)
+
+			garage.return_fixed_bikes(van)
+			garage.bike_rack.count.should == 0
+		end
+
 	end
 end

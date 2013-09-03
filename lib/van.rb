@@ -26,14 +26,14 @@ require 'garage'
 	end
 
 	def deliver_broken_bikes(garage)
-		@broken_bikes = garage.take_bikes_from_van(self)
+		@broken_bikes = garage.takes_bikes_from_van(self)
 	end
 
-	def take_fixed_bikes(garage)
-		garage.bike_rack.each do |bike|
-			if bike.broken? == false		
-				@fixed_bikes << bike
-			end
-		end
+	def takes_fixed_bikes(garage)
+		garage.return_fixed_bikes(self)
+	end
+
+	def deliver_fixed_bikes(station)
+		@fixed_bikes = station.takes_bikes_from_van(self)
 	end
 end

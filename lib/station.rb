@@ -39,12 +39,22 @@ attr_accessor :bicycles
 		#TO DO: ensure option if station is full
 	end
 
+	def has_how_many_bikes?
+		@bicycles.count
+	end
 
 	def bikes_available?
-		bicycles.count > 0? true : false
+		@bicycles.count > 0? true : false
 	end
 
 	def space?
 		@bicycles.count < 30? true : false
+	end
+
+	def takes_bikes_from_van(van)
+		van.fixed_bikes.each do |bike|
+			@bicycles << bike
+		end
+		[]
 	end
 end

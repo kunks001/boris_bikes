@@ -1,11 +1,13 @@
 require './lib/station'
 require './lib/bike'
 require './lib/person'
+require './lib/van'
 
 describe Station do
 
 let(:station) {Station.new("Old_Street")}
 let(:person) {Person.new("Srikanth")}
+let(:van) {Van.new}
 
 	it 'should have a name' do
   		station.name.should == "Old_Street"
@@ -18,6 +20,10 @@ let(:person) {Person.new("Srikanth")}
  	it 'should initialise with an array of 25 bikes' do
  		station.bicycles.count.should == 25
  	end
+
+  it 'can count how many bikes there are' do
+    station.has_how_many_bikes?.should == 25
+  end
 
  	it 'should have space for thirty bicycles' do
     4.times{ station.bicycles << "bike" }
@@ -37,6 +43,16 @@ let(:person) {Person.new("Srikanth")}
     25.times{ station.bicycles.shift }
 		station.bikes_available?.should == false
 	end
+
+  # it 'should know if it has no working bikes' do
+  #   array = Array.new(5,Bike.new).each{|bike|bike.gets_broken}
+  #   station.instance_variable_set(:@bicycles, array)
+  #   station.are_all_bikes_broken?.should == true
+  # end
+
+  # it 'should know if it has any unbroken bikes' do
+  #   station.are_all_bikes_broken?.should == false
+  # end
 
   it 'should lose a bike once it is rented' do
     station.rent_to
@@ -58,9 +74,18 @@ let(:person) {Person.new("Srikanth")}
     bike = Bike.new
     person = double(:person, { bike: bike })
     station.bike_returned_by(person)
-    
+
     station.bicycles.last.should == bike
   end
+
+  it 'takes fixed bikes from the van' do
+    array = Array.new(2,Bike.new)
+    van.instance_variable_set(:@fixed_bikes, array)
+
+    station.takes_bikes_from_van(van)
+    station.bicycles.count.should == 27
+  end
+
 end
 
 

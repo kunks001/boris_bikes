@@ -11,8 +11,10 @@ require 'bike'
 		@bike_rack
 	end
 
-	def take_bikes_from_van(van)
-		@bike_rack << van.broken_bikes
+	def takes_bikes_from_van(van)
+		van.broken_bikes.each do |bike|
+			@bike_rack << bike
+		end
 		[]
 	end
 
@@ -27,6 +29,7 @@ require 'bike'
 			if bike.broken? == false		
 				van.fixed_bikes << bike
 			end
+		@bike_rack = []
 		end
 	end
 end
