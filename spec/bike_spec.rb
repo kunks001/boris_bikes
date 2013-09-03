@@ -1,14 +1,15 @@
 require './lib/bike'
 
 describe Bike do
+
+	let(:bike) {Bike.new}
+
 	it 'should not be broken' do
-		bike = Bike.new
-		bike.broken? == false
+		bike.broken?.should == false
 	end
 
 	it 'should be broken once it breaks' do
-		bike = Bike.new
 		bike.gets_broken
-		bike.broken? == true
+		bike.broken?.should == true
 	end
 end

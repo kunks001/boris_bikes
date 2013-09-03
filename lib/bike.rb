@@ -10,9 +10,13 @@ class Bike
 
   def gets_broken
   	@broken = true
+    self
+  end
+
+  def fix
+    @broken = false
   end
 
   def id
   end
-
 end

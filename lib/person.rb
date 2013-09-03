@@ -21,46 +21,20 @@ attr_accessor :bicycles
   end
 
   def rent(station)
-    station.bikes_available?
-    if @bike == nil
-      @bike = station.bicycles.shift
-    else
-      return "There are no bikes available!"
-    end
+    @bike = station.rent_to
+    # TO DO: make sure person can only have one bike at a time 
   end
 
-  def cycle_to(station)
-    probability = rand(1..6)
+  def breaks_bike(probability = nil)
+    probability ||= rand(1..6)
     if probability == 6
-      @bike.gets_broken
-      "Oh no, your bike is broken!"
-    else
-      "You reached #{station}!"
+      self.bike.gets_broken
     end
   end
 
-  def want_to_return_bike?(station, answer)
-    if answer = "yes"
-      return_bike(station)
-    elsif answer = "no"
-      "Well, where do you want to go next?"
-    else
-      "Make up your bloody mind!"
-    end
-  end 
+  #TO DO: make sure person cycles somewhere
 
   def return_bike(station)
-    if station.space?
-      bike = @bike
-      station.bicycles << bike
-      @bike = nil
-    else
-      return "There's no space!"
-    end
-  end
-
-  def with_a_broken_bike(station)
-    return_bike(station)
-    "you walked to #{station} with your broken bike and put it back sheepishly"
+   @bike = station.bike_returned_by(self)
   end
 end

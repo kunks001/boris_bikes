@@ -1,10 +1,12 @@
 class Station
 require 'bike'
+require 'person'
 attr_accessor :bicycles
 
 	def initialize(name)
 		@name = name
 		@bicycles = Array.new
+		bikes_daily_setup
 	end
 
 	def name
@@ -27,8 +29,19 @@ attr_accessor :bicycles
 		end
 	end
 
+	def rent_to
+	    @bicycles.shift if bikes_available?
+	end
+
+	def bike_returned_by(person)
+      @bicycles << person.bike if space?
+      nil
+		#TO DO: ensure option if station is full
+	end
+
+
 	def bikes_available?
-		@bicycles.count > 0? true : false
+		bicycles.count > 0? true : false
 	end
 
 	def space?
