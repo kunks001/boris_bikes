@@ -3,6 +3,7 @@ require './lib/station'
 describe Station do
 
 let(:station) {Station.new("Old_Street")}
+let(:person) {Person.new("Srikanth")}
 
 	it 'should have a name' do
   		station.name == "Old_Street"
@@ -45,4 +46,28 @@ let(:station) {Station.new("Old_Street")}
 		station.bikes_available? == false
 	end
 
+  it 'should lose a bike once it is rented' do
+    station.bikes_daily_setup
+    person.rent(station)
+    station.bicycles.count == 24
+  end
+
+  it 'should gain a bike once it is returned' do
+    station.bikes_daily_setup
+    person.return_bike(station)
+    station.bicycles.count == 26
+  end
+
+  it 'should have the same bike object as the user had before it was returned' do
+    station.bikes_daily_setup
+    object = station.bicycles.first
+    person.rent(station)
+    person.return_bike(station)
+    station.bicycles.last == object
+  end
+
+  
 end
+
+
+

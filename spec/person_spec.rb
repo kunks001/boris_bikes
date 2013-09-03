@@ -24,4 +24,33 @@ let(:station) {Station.new('Old Street')}
     person.rent(station)
     person.bike.should_not eq nil
   end
+
+  it 'should not have a bike once it is returned' do
+    station.bikes_daily_setup
+    person.return_bike(station)
+    person.bike.should eq nil
+  end
+
+  it 'should have the same bike object that was at the station' do
+    station.bikes_daily_setup
+    object = station.bicycles.first
+    person.rent(station)
+    person.bike.should eq object
+  end
+
+  it 'should have a one in six chance of breaking the bike' do
+    station.bikes_daily_setup
+    person.rent(station)
+    Kernel.stub!(:rand).and_return( 6 )
+    person.cycle_to(station)
+    person.bike.broken? == true 
+  end
+
+  it 'should have a five in six chance of not breaking the bike' do
+    station.bikes_daily_setup
+    person.rent(station)
+    Kernel.stub!(:rand).and_return( 1..5 )
+    person.cycle_to(station)
+    person.bike.broken? == false
+  end
 end
