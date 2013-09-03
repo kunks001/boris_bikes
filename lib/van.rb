@@ -18,11 +18,16 @@ require 'garage'
 	end
 
 	def take_broken_bikes(station)		
-		station.bicycles.each do |bike|
-		    if bike.broken? == true
-		      @broken_bikes << bike
-	      	end
-	    end
+		# station.bicycles.each do |bike|
+		#     if bike.broken? == true
+		#       @broken_bikes << bike
+	 #      	end
+	 #    end
+	 	if station.broken_bicycles.count > 0
+		 	station.broken_bicycles.each do |bike|
+			    @broken_bikes << bike
+			end
+		end
 	end
 
 	def deliver_broken_bikes(garage)

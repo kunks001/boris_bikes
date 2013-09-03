@@ -72,7 +72,7 @@ let(:van) {Van.new}
     person = double(:person, { bike: bike.gets_broken })
     
     station.bike_returned_by(person)
-    station.broken_bikes.count.should == 1
+    station.broken_bicycles.count.should == 1
   end
 
   it 'has consistent object id from station to person' do

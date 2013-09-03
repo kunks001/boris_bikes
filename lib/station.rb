@@ -7,7 +7,7 @@ attr_accessor :broken
 	def initialize(name)
 		@name = name
 		@bicycles = Array.new
-		@broken_bikes = Array.new
+		@broken_bicycles = Array.new
 		bikes_daily_setup
 	end
 
@@ -22,8 +22,8 @@ attr_accessor :broken
 		@bicycles
 	end
 
-	def broken_bikes
-		@broken_bikes
+	def broken_bicycles
+		@broken_bicycles
 	end
 
 	def bikes_daily_setup
@@ -41,7 +41,7 @@ attr_accessor :broken
 
 	def bike_returned_by(person)
         if space? && person.bike.broken?
-      		@broken_bikes << person.bike 	
+      		@broken_bicycles << person.bike 	
   		else
   			@bicycles << person.bike
   		end
