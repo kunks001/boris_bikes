@@ -1,9 +1,5 @@
 class Person
 
-require 'station'
-require 'bike'
-attr_accessor :bicycles
-
   def initialize(name)  
     @name = name  
     @bike = nil

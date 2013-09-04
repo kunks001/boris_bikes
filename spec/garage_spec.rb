@@ -1,6 +1,7 @@
 require './lib/garage'
 
 describe Garage do
+
 let(:garage) {Garage.new}
 
 	it 'should initialise with an empty array' do
@@ -30,5 +31,4 @@ let(:garage) {Garage.new}
 		garage.return_fixed_bikes(van)
 		garage.bike_rack.count.should == 0
 	end
-
 end

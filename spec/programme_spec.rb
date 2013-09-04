@@ -5,12 +5,13 @@ require './lib/van'
 require './lib/garage'
 
 describe "Programme" do
-	let(:station) {Station.new("Old Street")}
-  let(:person) {Person.new("Srikanth")}
-  let(:bike) {Bike.new}
-  let(:van) {Van.new}
-  let(:garage) {Garage.new}
-  let(:station2) {Station.new("Kings Cross")}
+
+let(:station) {Station.new("Old Street")}
+let(:person) {Person.new("Srikanth")}
+let(:bike) {Bike.new}
+let(:van) {Van.new}
+let(:garage) {Garage.new}
+let(:station2) {Station.new("Kings Cross")}
 
   it 'has consistent object id from station to person' do
     object = station.bicycles.first

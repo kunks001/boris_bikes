@@ -1,9 +1,5 @@
 class Van
 
-require 'station'
-require 'bike'
-require 'garage'
-
 	def initialize
 	  @broken_bikes = Array.new
 	  @fixed_bikes = Array.new

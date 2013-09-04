@@ -1,10 +1,5 @@
 class Station
 
-require 'bike'
-require 'person'
-attr_accessor :bicycles
-attr_accessor :broken
-
 	def initialize(name)
 		@name = name
 		@bicycles = Array.new

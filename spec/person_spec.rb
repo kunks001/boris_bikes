@@ -3,8 +3,6 @@ require './lib/person'
 describe Person do
 
 let(:person) {Person.new('Srikanth')}
-let(:broken_array) {array = Array.new(25,Bike.new).each{
-                   |bike| bike.gets_broken }}
 
   it 'should have first name equal to input' do
   	person.name.should == 'Srikanth'
