@@ -1,7 +1,4 @@
 require './lib/station'
-require './lib/bike'
-require './lib/person'
-require './lib/van'
 
 describe Station do
 

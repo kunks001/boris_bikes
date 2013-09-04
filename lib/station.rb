@@ -1,4 +1,5 @@
 class Station
+	
 require 'bike'
 require 'person'
 attr_accessor :bicycles

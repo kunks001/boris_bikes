@@ -1,8 +1,5 @@
 class Garage
 
-require 'van'
-require 'bike'
-
 	def initialize
 		@bike_rack = Array.new
 	end
