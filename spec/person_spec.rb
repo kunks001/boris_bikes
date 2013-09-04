@@ -6,6 +6,7 @@ describe Person do
 
 let(:person) {Person.new('Srikanth')}
 let(:station) {Station.new('Old Street')}
+let(:station2) {Station.new('Kings Cross')}
 let(:bike) {Bike.new}
 let(:broken_array) {array = Array.new(25,Bike.new).each{
                    |bike| bike.gets_broken }}
@@ -33,8 +34,8 @@ let(:broken_array) {array = Array.new(25,Bike.new).each{
   it 'cannot rent a broken bike' do
     station.instance_variable_set(:@broken_bicycles, broken_array)
     25.times{ station.bicycles.shift }
-
     person.rent(station)
+
     person.bike.should == nil
   end
 
@@ -43,6 +44,15 @@ let(:broken_array) {array = Array.new(25,Bike.new).each{
 
     person.return_bike(station)
     person.bike.should eq nil
+  end
+
+  it 'can return a bike at any station that has space' do
+    person.rent(station)
+    person.return_bike(station2)
+
+    station.bicycles.count == 24
+    station2.bicycles.count == 26
+    person.bike == nil
   end
 
   it 'should have the same bike object that was at the station' do
