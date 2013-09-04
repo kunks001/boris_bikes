@@ -10,6 +10,7 @@ describe "Programme" do
   let(:bike) {Bike.new}
   let(:van) {Van.new}
   let(:garage) {Garage.new}
+  let(:station2) {Station.new("Kings Cross")}
 
   it 'has consistent object id from station to person' do
     object = station.bicycles.first
@@ -30,5 +31,15 @@ describe "Programme" do
 
     station.takes_bikes_from_van(van)
     station.bicycles.count.should == 27
+  end
+
+
+  it 'lets a person return a bike at any station that has space' do
+    person.rent(station)
+    person.return_bike(station2)
+
+    station.bicycles.count == 24
+    station2.bicycles.count == 26
+    person.bike == nil
   end
 end

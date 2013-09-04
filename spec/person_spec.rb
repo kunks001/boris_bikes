@@ -32,10 +32,11 @@ let(:broken_array) {array = Array.new(25,Bike.new).each{
   end
 
   it 'cannot rent a broken bike' do
-    station.instance_variable_set(:@broken_bicycles, broken_array)
+    station = double(:station, { bicycles: Array.new(25,"Bike"), 
+                                 rent_to: nil})
     25.times{ station.bicycles.shift }
-    person.rent(station)
 
+    person.rent(station)
     person.bike.should == nil
   end
 
@@ -46,17 +47,9 @@ let(:broken_array) {array = Array.new(25,Bike.new).each{
     person.bike.should eq nil
   end
 
-  it 'can return a bike at any station that has space' do
-    person.rent(station)
-    person.return_bike(station2)
-
-    station.bicycles.count == 24
-    station2.bicycles.count == 26
-    person.bike == nil
-  end
-
   it 'should have the same bike object that was at the station' do
-    object = station.bicycles.first
+    station = double(:station, { rent_to: "bike"})
+    object = station.rent_to
     person.rent(station)
 
     person.bike.should eq object
