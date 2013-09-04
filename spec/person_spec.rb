@@ -6,6 +6,9 @@ describe Person do
 
 let(:person) {Person.new('Srikanth')}
 let(:station) {Station.new('Old Street')}
+let(:bike) {Bike.new}
+let(:broken_array) {array = Array.new(25,Bike.new).each{
+                   |bike| bike.gets_broken }}
 
   it 'should have first name equal to input' do
   	person.name.should == 'Srikanth'
@@ -25,6 +28,14 @@ let(:station) {Station.new('Old Street')}
 
     person.rent(station)
     person.bike.should eq bike
+  end
+
+  it 'cannot rent a broken bike' do
+    station.instance_variable_set(:@broken_bicycles, broken_array)
+    25.times{ station.bicycles.shift }
+
+    person.rent(station)
+    person.bike.should == nil
   end
 
   it 'should not have a bike once it is returned' do

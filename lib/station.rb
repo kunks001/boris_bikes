@@ -50,7 +50,7 @@ attr_accessor :broken
         if space?
         	broken_or_working?(person)
   		else
-  			"Sorry, there's no space at this station"
+  			"Sorry, there is no space at this station"
   		end
   	end
 

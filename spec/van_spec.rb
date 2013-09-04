@@ -11,42 +11,38 @@ require './lib/garage'
     let(:garage) {Garage.new}
 		let(:station) {Station.new("Old Street")}
     let(:bike) {Bike.new}
+    let(:bike_broken_array) {Array.new(10,Bike.new).each{
+                             |bike| bike.gets_broken}}
+    let(:bike_array) {Array.new(10,Bike.new)}
 
 		it 	'should collect broken bikes' do
-      array = Array.new(10,Bike.new).each{|bike| bike.gets_broken}
-      station.instance_variable_set(:@broken_bicycles, array)
+      station.instance_variable_set(:@broken_bicycles, bike_broken_array)
       van.take_broken_bikes(station)
 
       van.broken_bikes.count.should == 10
 		end
 
     it 'should only collect broken bikes' do
-      array = Array.new(10,Bike.new)
-      station.instance_variable_set(:@broken, array)
-      
       van.take_broken_bikes(station)
       van.broken_bikes.count.should == 0
     end
 
     it 'should deliver broken bikes' do
-      array = Array.new(10,Bike.new).each{|bike| bike.gets_broken}
-      van.instance_variable_set(:@broken_bikes, array)
+      van.instance_variable_set(:@broken_bikes, bike_broken_array)
       van.deliver_broken_bikes(garage)
 
       van.broken_bikes.count.should == 0
     end 
 
     it 'should collect fixed bikes' do
-      array = Array.new(10,Bike.new)
-      garage.instance_variable_set(:@bike_rack, array)
+      garage.instance_variable_set(:@bike_rack, bike_array)
 
       van.takes_fixed_bikes(garage)
       van.fixed_bikes.count.should == 10
     end
 
     it 'should not collect broken bikes from garage' do
-      array = Array.new(10,Bike.new).each{|bike| bike.gets_broken}
-      garage.instance_variable_set(:@bike_rack, array)
+      garage.instance_variable_set(:@bike_rack, bike_broken_array)
       
       van.takes_fixed_bikes(garage)
       van.fixed_bikes.count.should == 0

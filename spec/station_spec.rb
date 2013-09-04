@@ -22,7 +22,7 @@ let(:bike) {Bike.new}
  		station.bicycles.count.should == 25
  	end
 
-  it 'can count how many working bikes there are' do
+  it 'can count how many working bicycles there are' do
     station.has_how_many_bikes?.should == 25
   end
 
@@ -35,6 +35,16 @@ let(:bike) {Bike.new}
 		5.times{ station.bicycles << "bike" }
     station.space?.should == false
 	end
+
+  it 'should have space for thirty broken bicycles' do
+    4.times{ station.broken_bicycles << "bike" }
+    station.space?.should == true
+  end
+
+  it 'should not have space for more than thirty broken bicycles' do
+    5.times{ station.broken_bicycles << "bike" }
+    station.space?.should == false
+  end
 
   it 'should calculate space with broken and working bicycles' do
     4.times{ station.broken_bicycles << bike }
@@ -67,11 +77,27 @@ let(:bike) {Bike.new}
     station.bicycles.count.should == 26
   end
 
-  it 'should gain a broken bike once it is returned' do
+  it 'can determine if a returned bike is broken or working' do
+    person = double(:person, { bike: bike.gets_broken })
+
+    station.broken_or_working?(person)
+    station.broken_bicycles.count.should == 1
+  end
+
+  it 'should gain a broken bike once it is returned by person' do
     person = double(:person, { bike: bike.gets_broken })
     
     station.bike_returned_by(person)
     station.broken_bicycles.count.should == 1
+  end
+
+  it 'should return a message if there is no space left' do
+    person = double(:person, { bike: bike })
+
+    array = Array.new(30,Bike.new)
+    station.instance_variable_set(:@bicycles, array)
+
+    station.bike_returned_by(person).should == "Sorry, there is no space at this station"
   end
 
   it 'has consistent object id from station to person' do
@@ -87,14 +113,13 @@ let(:bike) {Bike.new}
     station.bicycles.last.should == bike
   end
 
-  it 'takes fixed bikes from the van' do
+  it 'takes only the fixed bikes from the van' do
     array = Array.new(2,Bike.new)
     van.instance_variable_set(:@fixed_bikes, array)
 
     station.takes_bikes_from_van(van)
     station.bicycles.count.should == 27
   end
-
 end
 
 

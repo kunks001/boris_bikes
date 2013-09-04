@@ -21,8 +21,7 @@ attr_accessor :bicycles
   end
 
   def rent(station)
-    @bike = station.rent_to
-    # TO DO: make sure person can only have one bike at a time 
+      @bike = station.rent_to
   end
 
   def breaks_bike(probability = nil)
@@ -31,8 +30,6 @@ attr_accessor :bicycles
       self.bike.gets_broken
     end
   end
-
-  #TO DO: make sure person cycles somewhere
 
   def return_bike(station)
    @bike = station.bike_returned_by(self)
