@@ -8,6 +8,7 @@ describe Station do
 let(:station) {Station.new("Old_Street")}
 let(:person) {Person.new("Srikanth")}
 let(:van) {Van.new}
+let(:bike) {Bike.new}
 
 	it 'should have a name' do
   		station.name.should == "Old_Street"
@@ -17,11 +18,11 @@ let(:van) {Van.new}
 		station.name.should_not == "St Pancras"
 	end
  	
- 	it 'should initialise with an array of 25 bikes' do
+ 	it 'should initialise with an array of 25 working bikes' do
  		station.bicycles.count.should == 25
  	end
 
-  it 'can count how many bikes there are' do
+  it 'can count how many working bikes there are' do
     station.has_how_many_bikes?.should == 25
   end
 
@@ -35,24 +36,24 @@ let(:van) {Van.new}
     station.space?.should == false
 	end
 
-	it 'should know when it has bicycles left' do
+  it 'should calculate space with broken and working bicycles' do
+    4.times{ station.broken_bicycles << bike }
+    station.space?.should == true
+  end
+
+  it 'should calculate space with broken and working bicycles' do
+    5.times{ station.broken_bicycles << "bike" }
+    station.space?.should == false
+  end
+
+	it 'should know when it has working bicycles left' do
 		station.bikes_available?.should == true
 	end
 
-	it 'should know when it has no bicycles left' do
+	it 'should know when it has no working bicycles left' do
     25.times{ station.bicycles.shift }
 		station.bikes_available?.should == false
 	end
-
-  # it 'should know if it has no working bikes' do
-  #   array = Array.new(5,Bike.new).each{|bike|bike.gets_broken}
-  #   station.instance_variable_set(:@bicycles, array)
-  #   station.are_all_bikes_broken?.should == true
-  # end
-
-  # it 'should know if it has any unbroken bikes' do
-  #   station.are_all_bikes_broken?.should == false
-  # end
 
   it 'should lose a bike once it is rented' do
     station.rent_to
@@ -60,7 +61,6 @@ let(:van) {Van.new}
   end
 
   it 'should gain a bike once it is returned' do
-    bike = Bike.new
     person = double(:person, { bike: bike })
 
     station.bike_returned_by(person)
@@ -68,7 +68,6 @@ let(:van) {Van.new}
   end
 
   it 'should gain a broken bike once it is returned' do
-    bike = Bike.new
     person = double(:person, { bike: bike.gets_broken })
     
     station.bike_returned_by(person)
@@ -82,7 +81,6 @@ let(:van) {Van.new}
   end
 
   it 'has consistent object id from person to station' do
-    bike = Bike.new
     person = double(:person, { bike: bike })
     station.bike_returned_by(person)
 

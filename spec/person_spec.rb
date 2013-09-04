@@ -7,8 +7,6 @@ describe Person do
 let(:person) {Person.new('Srikanth')}
 let(:station) {Station.new('Old Street')}
 
-# let(:station) { double(:station) }
-
   it 'should have first name equal to input' do
   	person.name.should == 'Srikanth'
   end
@@ -35,13 +33,6 @@ let(:station) {Station.new('Old Street')}
     person.return_bike(station)
     person.bike.should eq nil
   end
-
-  # it 'should cycle somewhere' do
-  #   station = double :station, {:name => "Station"}
-
-  #   person.cycle_to(Station, 0).should match /Station/
-  # end
-
 
   it 'should have the same bike object that was at the station' do
     object = station.bicycles.first

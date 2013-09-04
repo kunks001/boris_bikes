@@ -8,6 +8,7 @@ attr_accessor :broken
 		@name = name
 		@bicycles = Array.new
 		@broken_bicycles = Array.new
+		@total_bicycles = Array.new
 		bikes_daily_setup
 	end
 
@@ -26,6 +27,12 @@ attr_accessor :broken
 		@broken_bicycles
 	end
 
+	def total_number_of_bicycles
+		broken_bicycles.each { |bike| @total_bicycles << bike }
+		bicycles.each { |bike| @total_bicycles << bike}
+		@total_bicycles.count
+	end
+
 	def bikes_daily_setup
 		res = 0
 		while res < 25
@@ -40,14 +47,21 @@ attr_accessor :broken
 	end
 
 	def bike_returned_by(person)
-        if space? && person.bike.broken?
-      		@broken_bicycles << person.bike 	
+        if space?
+        	broken_or_working?(person)
   		else
-  			@bicycles << person.bike
+  			"Sorry, there's no space at this station"
   		end
-      nil
-		#TO DO: ensure option if station is full
-	end
+  	end
+
+  	def broken_or_working?(person)
+  		if person.bike.broken?
+      			@broken_bicycles << person.bike 	
+  			else
+  				@bicycles << person.bike
+  			end
+  		nil
+  	end
 
 	def has_how_many_bikes?
 		@bicycles.count
@@ -58,7 +72,8 @@ attr_accessor :broken
 	end
 
 	def space?
-		@bicycles.count < 30? true : false
+		total = total_number_of_bicycles 
+		total < 30? true : false
 	end
 
 	def takes_bikes_from_van(van)
