@@ -3,9 +3,11 @@ require './lib/station'
 describe Station do
 
 let(:station) {Station.new("Old_Street")}
-let(:person) {Person.new("Srikanth")}
-let(:van) {Van.new}
-let(:bike) {Bike.new}
+let(:bike) {double(:bike, { broken?: false })}
+let(:bike_broken) {double(:bike, { broken?: true })}
+let(:person) {double(:person, {bike: bike})}
+let(:person_broken) {double(:person, { bike: bike_broken })}
+
 
 	it 'should have a name' do
   		station.name.should == "Old_Street"
@@ -44,7 +46,7 @@ let(:bike) {Bike.new}
   end
 
   it 'should calculate space with broken and working bicycles' do
-    4.times{ station.broken_bicycles << bike }
+    4.times{ station.broken_bicycles << "bike" }
     station.space?.should == true
   end
 
@@ -54,6 +56,8 @@ let(:bike) {Bike.new}
   end
 
 	it 'should know when it has working bicycles left' do
+    array = Array.new(25,"Bike")
+    station.instance_variable_set(:@bicycle, array)
 		station.bikes_available?.should == true
 	end
 
@@ -68,54 +72,25 @@ let(:bike) {Bike.new}
   end
 
   it 'should gain a bike once it is returned' do
-    person = double(:person, { bike: bike })
-
     station.bike_returned_by(person)
     station.bicycles.count.should == 26
   end
 
   it 'can determine if a returned bike is broken or working' do
-    person = double(:person, { bike: bike.gets_broken })
-
-    station.broken_or_working?(person)
+    station.broken_or_working?(person_broken)
     station.broken_bicycles.count.should == 1
   end
 
   it 'should gain a broken bike once it is returned by person' do
-    person = double(:person, { bike: bike.gets_broken })
-    
-    station.bike_returned_by(person)
+    station.bike_returned_by(person_broken)
     station.broken_bicycles.count.should == 1
   end
 
   it 'should return a message if there is no space left' do
-    person = double(:person, { bike: bike })
-
-    array = Array.new(30,Bike.new)
+    array = Array.new(30, "bike")
     station.instance_variable_set(:@bicycles, array)
 
     station.bike_returned_by(person).should == "Sorry, there is no space at this station"
-  end
-
-  it 'has consistent object id from station to person' do
-    object = station.bicycles.first
-    person.rent(station)
-    person.bike.should == object
-  end
-
-  it 'has consistent object id from person to station' do
-    person = double(:person, { bike: bike })
-    station.bike_returned_by(person)
-
-    station.bicycles.last.should == bike
-  end
-
-  it 'takes only the fixed bikes from the van' do
-    array = Array.new(2,Bike.new)
-    van.instance_variable_set(:@fixed_bikes, array)
-
-    station.takes_bikes_from_van(van)
-    station.bicycles.count.should == 27
   end
 end
 

@@ -1,5 +1,5 @@
 class Station
-	
+
 require 'bike'
 require 'person'
 attr_accessor :bicycles
@@ -28,12 +28,6 @@ attr_accessor :broken
 		@broken_bicycles
 	end
 
-	def total_number_of_bicycles
-		broken_bicycles.each { |bike| @total_bicycles << bike }
-		bicycles.each { |bike| @total_bicycles << bike}
-		@total_bicycles.count
-	end
-
 	def bikes_daily_setup
 		res = 0
 		while res < 25
@@ -41,6 +35,12 @@ attr_accessor :broken
 			@bicycles << bike
 			res += 1
 		end
+	end
+
+	def total_number_of_bicycles
+		broken_bicycles.each { |bike| @total_bicycles << bike }
+		bicycles.each { |bike| @total_bicycles << bike}
+		@total_bicycles.count
 	end
 
 	def rent_to
