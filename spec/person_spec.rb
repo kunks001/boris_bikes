@@ -1,13 +1,8 @@
 require './lib/person'
-require './lib/bike'
-require './lib/station'
 
 describe Person do
 
 let(:person) {Person.new('Srikanth')}
-let(:station) {Station.new('Old Street')}
-let(:station2) {Station.new('Kings Cross')}
-let(:bike) {Bike.new}
 let(:broken_array) {array = Array.new(25,Bike.new).each{
                    |bike| bike.gets_broken }}
 
@@ -56,16 +51,13 @@ let(:broken_array) {array = Array.new(25,Bike.new).each{
   end
 
   it 'should have a one in six chance of breaking the bike' do
-    person.rent(station)
-    person.breaks_bike(6)
+    bike = double(:bike, { gets_broken: true})
 
-    person.bike.broken?.should == true 
+    person.instance_variable_set(:@bike, bike)
+    person.breaks_bike(6).should == true 
   end
 
   it 'should have a five in six chance of not breaking the bike' do
-    person.rent(station)
-    person.breaks_bike(5)
-
-    person.bike.broken?.should == false 
+    person.breaks_bike(5).should == nil 
   end
 end

@@ -18,11 +18,6 @@ require 'garage'
 	end
 
 	def take_broken_bikes(station)		
-		# station.bicycles.each do |bike|
-		#     if bike.broken? == true
-		#       @broken_bikes << bike
-	 #      	end
-	 #    end
 	 	if station.broken_bicycles.count > 0
 		 	station.broken_bicycles.each do |bike|
 			    @broken_bikes << bike
@@ -35,7 +30,7 @@ require 'garage'
 	end
 
 	def takes_fixed_bikes(garage)
-		garage.return_fixed_bikes(self)
+		@fixed_bikes = garage.return_fixed_bikes(self)
 	end
 
 	def deliver_fixed_bikes(station)

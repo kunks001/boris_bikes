@@ -22,9 +22,11 @@ class Garage
     end
 
     def return_fixed_bikes(van)
+    	fixed_bikes = Array.new
     	bike_rack.each do |bike|
 			if bike.broken? == false		
-				van.fixed_bikes << bike
+				fixed_bikes << bike
+				fixed_bikes
 			end
 		@bike_rack = []
 		end
