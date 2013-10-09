@@ -1,7 +1,9 @@
 class Garage
 
+  attr_writer :bike_rack
+
 	def initialize
-		@bike_rack = Array.new
+		@bike_rack = []
 	end
 
 	def bike_rack
@@ -18,17 +20,14 @@ class Garage
 	def fix_bikes
 		bike_rack.each do |bike|
 			bike.fix
-    	end
-    end
+  	end
+  end
 
-    def return_fixed_bikes(van)
-    	fixed_bikes = Array.new
-    	bike_rack.each do |bike|
-			if bike.broken? == false		
-				fixed_bikes << bike
-				fixed_bikes
-			end
-		@bike_rack = []
-		end
+  def return_fixed_bikes(van)
+    bikes = bike_rack.reject { |bike| bike.broken? }
+    @bike_rack = []
+
+    return bikes
 	end
+
 end

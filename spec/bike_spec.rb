@@ -2,8 +2,8 @@ require './lib/bike'
 
 describe Bike do
 
-	let(:bike) {Bike.new}
-	let(:broken_bike) {Bike.new.gets_broken}
+let(:bike) {Bike.new}
+let(:broken_bike) {Bike.new.gets_broken}
 
 	it 'should not be broken' do
 		bike.broken?.should == false
@@ -15,7 +15,6 @@ describe Bike do
 
 	it 'should recognise when it is fixed' do
 		broken_bike.fix
-
 		bike.broken?.should == false
 	end
 end

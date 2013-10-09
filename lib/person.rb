@@ -9,9 +9,6 @@ class Person
     @name
   end
 
-  def id
-  end
-
   def bike
     @bike
   end

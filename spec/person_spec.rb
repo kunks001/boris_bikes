@@ -8,10 +8,6 @@ let(:person) {Person.new('Srikanth')}
   	person.name.should == 'Srikanth'
   end
 
-  it 'should have a unique id' do
-    person.id != Person.new("Will").id
-  end
-
   it 'should have no bike initially' do
 		person.bike.should == nil
   end
@@ -25,9 +21,7 @@ let(:person) {Person.new('Srikanth')}
   end
 
   it 'cannot rent a broken bike' do
-    station = double(:station, { bicycles: Array.new(25,"Bike"), 
-                                 rent_to: nil})
-    25.times{ station.bicycles.shift }
+    station = double(:station, { rent_to: nil })
 
     person.rent(station)
     person.bike.should == nil

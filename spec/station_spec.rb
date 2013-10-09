@@ -3,6 +3,12 @@ require './lib/station'
 describe Station do
 
 let(:station) {Station.new("Old_Street")}
+let(:full_station) {
+  s = Station.new('Blah')
+  5.times { s.bicycles << double(:bike) }
+  s
+}
+
 let(:bike) {double(:bike, { broken?: false })}
 let(:bike_broken) {double(:bike, { broken?: true })}
 let(:person) {double(:person, {bike: bike})}
@@ -31,8 +37,7 @@ let(:person_broken) {double(:person, { bike: bike_broken })}
 	end
 
 	it 'should not have space for more than thirty bicycles' do
-		5.times{ station.bicycles << "bike" }
-    station.space?.should == false
+		full_station.space?.should == false
 	end
 
   it 'should have space for thirty broken bicycles' do

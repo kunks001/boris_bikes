@@ -4,7 +4,6 @@ class Station
 		@name = name
 		@bicycles = Array.new
 		@broken_bicycles = Array.new
-		@total_bicycles = Array.new
 		bikes_daily_setup
 	end
 
@@ -32,11 +31,14 @@ class Station
 		end
 	end
 
+  # BROKEN
 	def total_number_of_bicycles
-		broken_bicycles.each { |bike| @total_bicycles << bike }
-		bicycles.each { |bike| @total_bicycles << bike}
-		@total_bicycles.count
+    total_bicycles_count
 	end
+
+  def total_bicycles_count
+    broken_bicycles.length + bicycles.length
+  end
 
 	def rent_to
 	    @bicycles.shift if bikes_available?
